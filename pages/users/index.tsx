@@ -1,11 +1,12 @@
 import { withLayout } from '@/layout/Layout';
-import { AllUsers } from '@/page-components/AllUsers';
-import { Pagination } from '@/page-components/Pagination';
+import { AllUsers } from '@/page-components/AllUsers/AllUsers';
+import { Pagination } from '@/page-components/Pagination/Pagination';
 import SearchWidget from '@/page-components/SearchWidget/SearchWidget';
 import { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { Props, UserData } from './type';
 
 const Users: NextPage<Props> = ({ data }: { data: UserData | null }) => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const Users: NextPage<Props> = ({ data }: { data: UserData | null }) => {
 
   const [page, setPage] = useState((initialPage ?? 0) / 10);
   const [startPage, setStartPage] = useState(1);
-  const [endPage, setEndPage] = useState((total ?? 0) / 10);
+  const [endPage, setEndPage] = useState(Math.ceil((total ?? 0) / 10));
 
   useEffect(() => {
     router.push(`/users?page=${page + 1}`);

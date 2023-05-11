@@ -1,6 +1,6 @@
-import { Section } from '@/components/common/Section';
-import { UserCardMini } from '@/components/common/UserCardMini';
-import { Title } from '@/components/typography/Title';
+import { Section } from '@/components/common/Section/Section';
+import { UserCardMini } from '@/components/common/UserCardMini/UserCardMini';
+import { Title } from '@/components/typography/Title/Title';
 import { FC, useState } from 'react';
 import { User } from '../AllUsers/AllUsers.props';
 
@@ -37,7 +37,7 @@ const SearchWidget: FC = () => {
   };
 
   return (
-    <Section className="h-full min-h-[420px] bg-primary">
+    <Section className="bg-primary">
       <div className="container">
         <Title tag="h2" variant="light">
           Search for user
@@ -49,13 +49,8 @@ const SearchWidget: FC = () => {
           className="mb-4"
           placeholder="Name.."
         />
-        {!searchTerm && (
-          <Title tag="h3" variant="light">
-            Start typing a name of user and see the results
-          </Title>
-        )}
-        <div className="max-h-[180px] overflow-y-scroll md:max-h-[220px] xl:max-h-[190px]">
-          <ul>
+        <div className="relative">
+          <ul className="absolute left-0 top-0 z-10 max-h-[400px] overflow-y-scroll rounded-s bg-dark">
             {suggestedUsers.map(({ id, firstName, lastName, image }) => (
               <li key={id}>
                 <UserCardMini

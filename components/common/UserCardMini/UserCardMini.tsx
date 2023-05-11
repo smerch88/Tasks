@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import cn from 'classnames';
+import clsx from 'clsx';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Paragraph } from '@/components/typography/Paragraph';
 
 import { UserCardMiniProps } from './UserCardMini.props';
+import { Paragraph } from '@/components/typography/Paragraph/Paragraph';
 
 export const UserCardMini: FC<UserCardMiniProps> = ({
   className,
@@ -17,13 +17,12 @@ export const UserCardMini: FC<UserCardMiniProps> = ({
 }) => {
   return (
     <div
-      className={cn(
-        'relative flex rounded-lg p-4 shadow-card hover:shadow-card_hover xl:p-8',
+      className={clsx(
+        'relative flex rounded-lg p-4 shadow-card duration-300 hover:shadow-card_hover xl:p-8',
         className,
-        {
-          ['items-end justify-center']: direction == 'horizontal',
-          ['flex-col items-center']: direction == 'vertical',
-        },
+        direction == 'horizontal'
+          ? 'items-end justify-center'
+          : 'flex-col items-center',
       )}
     >
       <div className="relative h-10 w-10">

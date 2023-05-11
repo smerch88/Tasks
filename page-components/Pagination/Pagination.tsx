@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { PaginationProps } from './Pagination.props';
-import cn from 'classnames';
+import clsx from 'clsx';
 
 export const Pagination: FC<PaginationProps> = ({
   setPage,
@@ -14,7 +14,7 @@ export const Pagination: FC<PaginationProps> = ({
   };
 
   const handleIncreasePage = () => {
-    const newPage = Math.min(page + 1, 9);
+    const newPage = Math.min(page + 1, endPage);
     setPage(newPage);
   };
 
@@ -25,13 +25,13 @@ export const Pagination: FC<PaginationProps> = ({
 
   const pageButtons = [];
 
-  for (let i = startPage; i <= endPage; i++) {
+  for (let i = startPage; i <= endPage; ++i) {
     const isActive = i === page + 1;
     pageButtons.push(
       <button
-        className={cn(
-          'w-full max-w-[40px] rounded-sm border-2 border-solid border-primary bg-primary p-2 text-white_light duration-300 hover:border-hover hover:bg-hover',
-          { 'border-hover bg-hover': isActive }, // Added 'text-bold' as a separate object property
+        className={clsx(
+          'w-full max-w-[40px] rounded-sm border-2 border-solid p-2 text-white_light duration-300 hover:border-hover hover:bg-hover',
+          isActive ? 'border-hover bg-hover' : 'border-primary bg-primary',
         )}
         key={i}
         onClick={() => handlePageClick(i - 1)}
@@ -44,19 +44,31 @@ export const Pagination: FC<PaginationProps> = ({
 
   return (
     <div className="container">
-      <div className="flex justify-center gap-2">
+      <div className="flex justify-center gap-[4px] md:gap-2">
         <button
           onClick={handleDecreasePage}
-          className="w-full max-w-[40px] rounded-sm border-2 border-solid border-primary bg-primary p-2 text-white_light duration-300 hover:border-hover hover:bg-hover"
+          className={clsx(
+            'w-full max-w-[28px] rounded-sm border-2 border-solid p-2 text-white_light duration-300 md:max-w-[40px]',
+            page === startPage - 1
+              ? 'border-gray_light bg-gray_light'
+              : 'border-primary bg-primary  hover:border-hover hover:bg-hover',
+          )}
+          disabled={page === startPage - 1}
         >
           -
         </button>
-        <div className="grid grid-cols-5 gap-2 xl:grid-cols-10 ">
+        <div className="grid grid-cols-5 gap-[4px] md:gap-2 xl:grid-cols-10 ">
           {pageButtons}
         </div>
         <button
           onClick={handleIncreasePage}
-          className="w-full max-w-[40px] rounded-sm border-2 border-solid border-primary bg-primary p-2 text-white_light duration-300 hover:border-hover hover:bg-hover"
+          className={clsx(
+            'w-full max-w-[28px] rounded-sm border-2 border-solid p-2 text-white_light duration-300 md:max-w-[40px]',
+            page === endPage - 1
+              ? 'border-gray_light bg-gray_light'
+              : 'border-primary bg-primary  hover:border-hover hover:bg-hover',
+          )}
+          disabled={page === endPage - 1}
         >
           +
         </button>

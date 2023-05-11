@@ -1,5 +1,5 @@
 import { withLayout } from '@/layout/Layout';
-import { UserDetails } from '@/page-components/UserDetails';
+import { UserDetails } from '@/page-components/UserDetails/UserDetails';
 import { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 

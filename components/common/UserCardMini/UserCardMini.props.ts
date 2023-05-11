@@ -1,4 +1,4 @@
-export interface UserCardMiniProps {
+export type UserCardMiniProps = {
   className?: string;
   firstName: string;
   lastName: string;
@@ -6,4 +6,4 @@ export interface UserCardMiniProps {
   image: string;
   variant?: 'dark' | 'light';
   direction?: 'horizontal' | 'vertical';
-}
+};

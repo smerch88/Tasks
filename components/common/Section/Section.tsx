@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import cn from 'classnames';
+import clsx from 'clsx';
 
 import { SectionProps } from './Section.props';
 
@@ -9,7 +9,7 @@ export const Section: FC<SectionProps> = ({
   ...props
 }) => {
   return (
-    <section className={cn('py-10 xl:py-16', className)} {...props}>
+    <section className={clsx('py-10 xl:py-16', className)} {...props}>
       {children}
     </section>
   );

@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { FC } from 'react';
 import { UserProps } from './UserDetails.props';
-import { Title } from '@/components/typography/Title';
-import { Paragraph } from '@/components/typography/Paragraph';
-import { Section } from '@/components/common/Section';
+import { Title } from '@/components/typography/Title/Title';
+import { Paragraph } from '@/components/typography/Paragraph/Paragraph';
+import { Section } from '@/components/common/Section/Section';
 
 export const UserDetails: FC<UserProps> = ({ user }: UserProps) => {
   const { firstName, lastName, address, image } = user;
