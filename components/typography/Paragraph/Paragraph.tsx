@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import cn from 'classnames';
+import clsx from 'clsx';
 import { ParagraphProps } from './Paragraph.props';
 
 export const Paragraph: FC<ParagraphProps> = ({
@@ -11,7 +11,7 @@ export const Paragraph: FC<ParagraphProps> = ({
 }) => {
   return (
     <p
-      className={cn(
+      className={clsx(
         'font-light',
         {
           'text-dark': variant === 'dark',
