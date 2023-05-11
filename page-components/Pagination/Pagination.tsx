@@ -1,6 +1,6 @@
+import clsx from 'clsx';
 import { FC } from 'react';
 import { PaginationProps } from './Pagination.props';
-import clsx from 'clsx';
 
 export const Pagination: FC<PaginationProps> = ({
   setPage,
@@ -43,7 +43,7 @@ export const Pagination: FC<PaginationProps> = ({
   }
 
   return (
-    <div className="container">
+    <div className="container mt-auto">
       <div className="flex justify-center gap-[4px] md:gap-2">
         <button
           onClick={handleDecreasePage}

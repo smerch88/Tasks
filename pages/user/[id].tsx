@@ -1,26 +1,10 @@
 import { withLayout } from '@/layout/Layout';
 import { UserDetails } from '@/page-components/UserDetails/UserDetails';
+import { UserProps } from '@/types';
 import { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 
-interface User {
-  firstName: string;
-  lastName: string;
-  address: Address;
-  image: string;
-  id: string;
-}
-
-interface Address {
-  address: string;
-  city: string;
-}
-
-type Props = {
-  user: User | null;
-};
-
-const UserPage: NextPage<Props> = ({ user }: Props) => {
+const UserPage: NextPage<UserProps> = ({ user }: UserProps) => {
   if (!user) {
     return <div>Error loading user data.</div>;
   }

@@ -2,11 +2,11 @@ import { withLayout } from '@/layout/Layout';
 import { AllUsers } from '@/page-components/AllUsers/AllUsers';
 import { Pagination } from '@/page-components/Pagination/Pagination';
 import SearchWidget from '@/page-components/SearchWidget/SearchWidget';
+import { Props, UserData } from '@/types';
 import { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Props, UserData } from './type';
 
 const Users: NextPage<Props> = ({ data }: { data: UserData | null }) => {
   const router = useRouter();

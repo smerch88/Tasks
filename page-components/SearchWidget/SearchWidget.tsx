@@ -1,8 +1,8 @@
 import { Section } from '@/components/common/Section/Section';
 import { UserCardMini } from '@/components/common/UserCardMini/UserCardMini';
 import { Title } from '@/components/typography/Title/Title';
+import { User } from '@/types';
 import { FC, useState } from 'react';
-import { User } from '../AllUsers/AllUsers.props';
 
 const SearchWidget: FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
