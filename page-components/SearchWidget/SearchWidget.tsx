@@ -39,7 +39,7 @@ const SearchWidget: FC = () => {
   return (
     <Section className="bg-primary">
       <div className="container">
-        <Title tag="h2" variant="light">
+        <Title tag="h2" variant="light" className="mb-2">
           Search for user
         </Title>
         <input

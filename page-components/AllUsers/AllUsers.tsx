@@ -9,7 +9,7 @@ export const AllUsers: FC<AllUsersProps> = ({ users }) => {
     <Section className="">
       <div className="container">
         <Title variant="dark" tag="h2" className="mb-4">
-          You can find all users here
+          Lis of all users
         </Title>
         <ul className="grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-2 xl:grid-cols-5">
           {users.map(({ firstName, lastName, image, id }) => (
