@@ -8,15 +8,17 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+const perPage = 10;
+
 const Users: NextPage<Props> = ({ data }: { data: UserData | null }) => {
   const router = useRouter();
   const users = data?.users ?? [];
   const total = data?.total;
   const initialPage = data?.skip;
 
-  const [page, setPage] = useState((initialPage ?? 0) / 10);
+  const [page, setPage] = useState((initialPage ?? 0) / perPage);
   const [startPage, setStartPage] = useState(1);
-  const [endPage, setEndPage] = useState(Math.ceil((total ?? 0) / 10));
+  const [endPage, setEndPage] = useState(Math.ceil((total ?? 0) / perPage));
 
   useEffect(() => {
     router.push(`/users?page=${page + 1}`);
@@ -54,7 +56,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const { query } = context;
     const page = parseInt(query.page as string, 10) || 1;
     const res = await fetch(
-      `https://dummyjson.com/users?limit=10&skip=${(page - 1) * 10}`,
+      `https://dummyjson.com/users?limit=${perPage}&skip=${
+        (page - 1) * perPage
+      }`,
+    );
+    console.log(
+      `https://dummyjson.com/users?limit=${perPage}&skip=${
+        (page - 1) * perPage
+      }`,
     );
 
     if (!res.ok) {

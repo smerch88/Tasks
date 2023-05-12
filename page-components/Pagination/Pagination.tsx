@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { PaginationProps } from './Pagination.props';
 
 export const Pagination: FC<PaginationProps> = ({
@@ -23,31 +23,31 @@ export const Pagination: FC<PaginationProps> = ({
     setPage(newPage);
   };
 
-  const pageButtons = [];
+  const pageButtons = useMemo(() => {
+    const buttons = [];
 
-  let isVisible: boolean;
-  let isDots: boolean;
+    let isVisible;
+    let isDots;
 
-  for (let i = startPage; i <= endPage; ++i) {
-    const isActive = i === page + 1;
-    if (page > 2 && page < endPage - 3) {
-      isVisible =
-        (i <= page + 2 && i >= page) || i === startPage || i === endPage;
-      isDots = i === page + 3 || i === page - 1;
-    } else if (page < endPage - 3) {
-      isVisible = i <= 5 || i === endPage || i === startPage || i <= 5;
-      isDots = i === 6;
-    } else if (page >= endPage - 4) {
-      isVisible = i >= 6 || i === startPage || i === endPage;
-      isDots = i === endPage - 5;
-    } else {
-      isVisible = false;
-      isDots = false;
-    }
+    for (let i = startPage; i <= endPage; ++i) {
+      const isActive = i === page + 1;
+      if (page > 2 && page < endPage - 3) {
+        isVisible =
+          (i <= page + 2 && i >= page) || i === startPage || i === endPage;
+        isDots = i === page + 3 || i === page - 1;
+      } else if (page < endPage - 3) {
+        isVisible = i <= 5 || i === endPage || i === startPage || i <= 5;
+        isDots = i === 6;
+      } else if (page >= endPage - 4) {
+        isVisible = i >= endPage - 4 || i === startPage || i === endPage;
+        isDots = i === endPage - 5;
+      } else {
+        isVisible = false;
+        isDots = false;
+      }
 
-    {
-      isDots &&
-        pageButtons.push(
+      if (isDots) {
+        buttons.push(
           <button
             className={clsx(
               'w-[36px] rounded-sm border-2 border-solid p-2 text-white_light duration-300 hover:border-hover hover:bg-hover md:w-[40px] smOnly:text-xs',
@@ -59,10 +59,10 @@ export const Pagination: FC<PaginationProps> = ({
             ...
           </button>,
         );
-    }
-    {
-      isVisible &&
-        pageButtons.push(
+      }
+
+      if (isVisible) {
+        buttons.push(
           <button
             className={clsx(
               'w-[36px] rounded-sm border-2 border-solid p-2 text-white_light duration-300 hover:border-hover hover:bg-hover md:w-[40px] smOnly:text-xs',
@@ -75,8 +75,11 @@ export const Pagination: FC<PaginationProps> = ({
             {i}
           </button>,
         );
+      }
     }
-  }
+
+    return buttons;
+  }, [startPage, endPage, page]);
 
   return (
     <div className="container mt-auto">
