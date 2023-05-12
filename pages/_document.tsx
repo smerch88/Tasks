@@ -7,7 +7,7 @@ export default class MyDocument extends Document {
       <Html lang="uk">
         <Head>
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-
+          <link rel="shortcut icon" href="/favicon/favicon.ico" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
