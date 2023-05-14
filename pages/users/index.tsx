@@ -1,4 +1,4 @@
-import { withLayout } from '@/layout/Layout';
+import { withLayout } from '@/page-components/layout/Layout';
 import { AllUsers } from '@/page-components/AllUsers';
 import { Pagination } from '@/page-components/Pagination';
 import SearchWidget from '@/page-components/SearchWidget';

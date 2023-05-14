@@ -1,8 +1,19 @@
-import { FC, ComponentType } from 'react';
-import { Footer } from '../Footer';
-import { Header } from '../Header';
+import {
+  ComponentType,
+  DetailedHTMLProps,
+  FC,
+  HtmlHTMLAttributes,
+  ReactNode,
+} from 'react';
+import { Footer } from './Footer';
+import { Header } from './Header';
 
-import { LayoutProps } from './Layout.props';
+export type LayoutProps = DetailedHTMLProps<
+  HtmlHTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+> & {
+  children: ReactNode;
+};
 
 export const Layout: FC<LayoutProps> = ({
   children,

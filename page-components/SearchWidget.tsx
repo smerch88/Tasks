@@ -50,7 +50,7 @@ const SearchWidget: FC = () => {
           placeholder="Name.."
         />
         <div className="relative">
-          <ul className="absolute left-0 top-0 z-10 max-h-[400px] overflow-y-scroll rounded-s bg-dark">
+          <ul className="absolute left-0 top-0 z-10 max-h-[400px] gap-2 overflow-y-scroll rounded-s bg-dark">
             {suggestedUsers.map(({ id, firstName, lastName, image }) => (
               <li key={id}>
                 <UserCardMini

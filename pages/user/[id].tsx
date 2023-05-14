@@ -1,4 +1,4 @@
-import { withLayout } from '@/layout/Layout';
+import { withLayout } from '@/page-components/layout/Layout';
 import { UserDetails } from '@/page-components/UserDetails';
 import { UserProps } from '@/types';
 import { GetServerSideProps } from 'next';
@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   } catch (error) {
     console.error('Error fetching user data:', error);
     return {
-      notFound: true,
+      props: { user: undefined },
     };
   }
 };
