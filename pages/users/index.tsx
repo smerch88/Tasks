@@ -2,15 +2,15 @@ import { withLayout } from '@/layout/Layout';
 import { AllUsers } from '@/page-components/AllUsers/AllUsers';
 import { Pagination } from '@/page-components/Pagination/Pagination';
 import SearchWidget from '@/page-components/SearchWidget/SearchWidget';
-import { Props, UserData } from '@/types';
-import { GetServerSidePropsContext, NextPage } from 'next';
+import { UsersPageProps } from '@/types';
+import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 const perPage = 10;
 
-const Users: NextPage<Props> = ({ data }: { data: UserData | null }) => {
+const Users: FC<UsersPageProps> = ({ data }) => {
   const router = useRouter();
   const users = data?.users ?? [];
   const total = data?.total;
@@ -77,9 +77,5 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   } catch (error) {
     console.error('Error fetching user data:', error);
-
-    return {
-      props: { data: null },
-    };
   }
 }
