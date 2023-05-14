@@ -1,4 +1,4 @@
-export interface User {
+export type User = {
   id: string;
   firstName: string;
   lastName: string;
@@ -26,47 +26,47 @@ export interface User {
   ein: string;
   ssn: string;
   userAgent: string;
-}
+};
 
-export interface Address {
+export type Address = {
   address: string;
   city: string;
   coordinates: Coordinates;
   postalCode: string;
   state: string;
-}
+};
 
-export interface Coordinates {
+export type Coordinates = {
   lat: number;
   lng: number;
-}
+};
 
-export interface Bank {
+export type Bank = {
   cardExpire: string;
   cardNumber: string;
   cardType: string;
   currency: string;
   iban: string;
-}
+};
 
-export interface Company {
+export type Company = {
   address: Address;
   department: string;
   name: string;
   title: string;
-}
+};
 
-export interface Hair {
+export type Hair = {
   color: string;
   type: string;
-}
+};
 
-export interface UserData {
+export type UserData = {
   users: User[];
   total: number;
   skip: number;
   limit: number;
-}
+};
 
 export type Props = {
   data: UserData;

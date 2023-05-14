@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-export interface ParagraphProps {
+export type ParagraphProps = {
   variant?: 'dark' | 'light';
   size?: 'big' | 'small' | 'extrasmall';
   className?: string;
   children: ReactNode;
-}
+};
