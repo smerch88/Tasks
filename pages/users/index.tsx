@@ -34,6 +34,9 @@ export const getServerSideProps = async (
     };
   } catch (error) {
     console.error('Error fetching user data:', error);
+    return {
+      props: { data: undefined },
+    };
   }
 };
 
