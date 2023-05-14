@@ -1,4 +1,4 @@
-import { Paragraph } from '@/components/typography/Paragraph/Paragraph';
+import { Paragraph } from '@/components/Paragraph';
 import Link from 'next/link';
 import { FC } from 'react';
 

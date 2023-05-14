@@ -1,7 +1,12 @@
-import { FC } from 'react';
 import clsx from 'clsx';
+import { DetailedHTMLProps, FC, HtmlHTMLAttributes, ReactNode } from 'react';
 
-import { SectionProps } from './Section.props';
+type SectionProps = DetailedHTMLProps<
+  HtmlHTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+> & {
+  children: ReactNode;
+};
 
 export const Section: FC<SectionProps> = ({
   children,

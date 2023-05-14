@@ -1,11 +1,11 @@
-import { Section } from '@/components/common/Section/Section';
-import { Paragraph } from '@/components/typography/Paragraph/Paragraph';
-import { Title } from '@/components/typography/Title/Title';
+import { Section } from '@/components/Section';
+import { Paragraph } from '@/components/Paragraph';
+import { Title } from '@/components/Title';
 import { UserProps } from '@/types';
 import Image from 'next/image';
 import { FC } from 'react';
 
-export const UserDetails: FC<UserProps> = ({ user }: UserProps) => {
+export const UserDetails: FC<UserProps> = ({ user }) => {
   const { firstName, lastName, address, image } = user;
 
   return (

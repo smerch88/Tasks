@@ -1,10 +1,33 @@
 import { withLayout } from '@/layout/Layout';
-import { UserDetails } from '@/page-components/UserDetails/UserDetails';
+import { UserDetails } from '@/page-components/UserDetails';
 import { UserProps } from '@/types';
-import { GetServerSideProps, NextPage } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { FC } from 'react';
 
-const UserPage: NextPage<UserProps> = ({ user }: UserProps) => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  try {
+    const { id } = query;
+    const res = await fetch(`https://dummyjson.com/users/${id}`);
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch user data');
+    }
+
+    const user = await res.json();
+
+    return {
+      props: { user: user },
+    };
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    return {
+      notFound: true,
+    };
+  }
+};
+
+const UserPage: FC<UserProps> = ({ user }) => {
   if (!user) {
     return <div>Error loading user data.</div>;
   }
@@ -28,26 +51,3 @@ const UserPage: NextPage<UserProps> = ({ user }: UserProps) => {
 };
 
 export default withLayout(UserPage);
-
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  try {
-    const { id } = query;
-    const res = await fetch(`https://dummyjson.com/users/${id}`);
-
-    if (!res.ok) {
-      throw new Error('Failed to fetch user data');
-    }
-
-    const user = await res.json();
-
-    return {
-      props: { user },
-    };
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-
-    return {
-      props: { user: null }, // You can handle the error state here, e.g., setting user to null
-    };
-  }
-};

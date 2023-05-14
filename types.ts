@@ -68,10 +68,6 @@ export type UserData = {
   limit: number;
 };
 
-export type UsersPageProps = {
-  data: UserData | undefined;
-};
-
 export type UserProps = {
   user: User;
 };

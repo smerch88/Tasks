@@ -2,9 +2,17 @@ import { FC } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Paragraph } from '@/components/Paragraph';
 
-import { UserCardMiniProps } from './UserCardMini.props';
-import { Paragraph } from '@/components/typography/Paragraph/Paragraph';
+type UserCardMiniProps = {
+  className?: string;
+  firstName: string;
+  lastName: string;
+  id: string;
+  image: string;
+  variant?: 'dark' | 'light';
+  direction?: 'horizontal' | 'vertical';
+};
 
 export const UserCardMini: FC<UserCardMiniProps> = ({
   className,

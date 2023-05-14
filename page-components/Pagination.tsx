@@ -1,6 +1,12 @@
 import clsx from 'clsx';
 import { FC, useMemo } from 'react';
-import { PaginationProps } from './Pagination.props';
+
+type PaginationProps = {
+  setPage: (page: number) => void;
+  endPage: number;
+  startPage: number;
+  page: number;
+};
 
 export const Pagination: FC<PaginationProps> = ({
   setPage,

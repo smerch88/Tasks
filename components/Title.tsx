@@ -1,5 +1,14 @@
 import clsx from 'clsx';
-import { TitleProps } from './Title.props';
+import { DetailedHTMLProps, ReactNode } from 'react';
+
+type TitleProps = DetailedHTMLProps<
+  React.HTMLAttributes<HTMLHeadingElement>,
+  HTMLHeadingElement
+> & {
+  tag?: 'h1' | 'h2' | 'h3';
+  variant?: 'dark' | 'light';
+  children: ReactNode;
+};
 
 export const Title = ({
   tag,

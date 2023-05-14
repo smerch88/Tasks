@@ -1,14 +1,41 @@
 import { withLayout } from '@/layout/Layout';
-import { AllUsers } from '@/page-components/AllUsers/AllUsers';
-import { Pagination } from '@/page-components/Pagination/Pagination';
-import SearchWidget from '@/page-components/SearchWidget/SearchWidget';
-import { UsersPageProps } from '@/types';
+import { AllUsers } from '@/page-components/AllUsers';
+import { Pagination } from '@/page-components/Pagination';
+import SearchWidget from '@/page-components/SearchWidget';
+import { UserData } from '@/types';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 
+type UsersPageProps = {
+  data: UserData | undefined;
+};
+
 const perPage = 10;
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
+  try {
+    const { query } = context;
+    const page = parseInt(query.page as string, 10) || 1;
+    const res = await fetch(
+      `https://dummyjson.com/users?limit=${perPage}&skip=${
+        (page - 1) * perPage
+      }`,
+    );
+    if (!res.ok) {
+      throw new Error('Failed to fetch user data');
+    }
+    const data = await res.json();
+    return {
+      props: { data },
+    };
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+  }
+};
 
 const Users: FC<UsersPageProps> = ({ data }) => {
   const router = useRouter();
@@ -17,8 +44,8 @@ const Users: FC<UsersPageProps> = ({ data }) => {
   const initialPage = data?.skip;
 
   const [page, setPage] = useState((initialPage ?? 0) / perPage);
-  const [startPage, setStartPage] = useState(1);
-  const [endPage, setEndPage] = useState(Math.ceil((total ?? 0) / perPage));
+  const [startPage] = useState(1);
+  const [endPage] = useState(Math.ceil((total ?? 0) / perPage));
 
   useEffect(() => {
     router.push(`/users?page=${page + 1}`);
@@ -50,32 +77,3 @@ const Users: FC<UsersPageProps> = ({ data }) => {
 };
 
 export default withLayout(Users);
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  try {
-    const { query } = context;
-    const page = parseInt(query.page as string, 10) || 1;
-    const res = await fetch(
-      `https://dummyjson.com/users?limit=${perPage}&skip=${
-        (page - 1) * perPage
-      }`,
-    );
-    console.log(
-      `https://dummyjson.com/users?limit=${perPage}&skip=${
-        (page - 1) * perPage
-      }`,
-    );
-
-    if (!res.ok) {
-      throw new Error('Failed to fetch user data');
-    }
-
-    const data = await res.json();
-
-    return {
-      props: { data },
-    };
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-  }
-}

@@ -1,6 +1,12 @@
-import { FC } from 'react';
 import clsx from 'clsx';
-import { ParagraphProps } from './Paragraph.props';
+import { FC, ReactNode } from 'react';
+
+export type ParagraphProps = {
+  variant?: 'dark' | 'light';
+  size?: 'big' | 'small' | 'extrasmall';
+  className?: string;
+  children: ReactNode;
+};
 
 export const Paragraph: FC<ParagraphProps> = ({
   variant = 'dark',

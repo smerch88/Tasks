@@ -1,8 +1,12 @@
-import { Section } from '@/components/common/Section/Section';
-import { UserCardMini } from '@/components/common/UserCardMini/UserCardMini';
-import { Title } from '@/components/typography/Title/Title';
+import { Section } from '@/components/Section';
+import { UserCardMini } from '@/components/UserCardMini';
+import { Title } from '@/components/Title';
 import { FC } from 'react';
-import { AllUsersProps } from './AllUsers.props';
+import { User } from '@/types';
+
+type AllUsersProps = {
+  users: User[];
+};
 
 export const AllUsers: FC<AllUsersProps> = ({ users }) => {
   return (

@@ -1,6 +1,6 @@
-import { Section } from '@/components/common/Section/Section';
-import { UserCardMini } from '@/components/common/UserCardMini/UserCardMini';
-import { Title } from '@/components/typography/Title/Title';
+import { Section } from '@/components/Section';
+import { UserCardMini } from '@/components/UserCardMini';
+import { Title } from '@/components/Title';
 import { User } from '@/types';
 import { FC, useState } from 'react';
 
