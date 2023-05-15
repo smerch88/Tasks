@@ -15,23 +15,25 @@ export const UserDetails: FC<UserProps> = ({ user }) => {
   return (
     <Section className="">
       <div className="container">
-        <Title tag="h2">Personal User Details</Title>
-        <ul>
-          <div className="relative h-10 w-10">
-            <Image src={image} alt={`${firstName} ${lastName} avatar`} fill />
-          </div>
-          <li>
-            <Paragraph>First Name: {firstName}</Paragraph>
-          </li>
-          <li>
-            <Paragraph>Last Name: {lastName}</Paragraph>
-          </li>
-          <li>
-            <Paragraph>
-              Adress: {address.address}, {address.city}
-            </Paragraph>
-          </li>
-        </ul>
+        <div className="rounded-xl p-10 text-center shadow-card">
+          <Title tag="h2">Personal User Details</Title>
+          <ul className="grid gap-4">
+            <div className="relative mx-auto h-40 w-40">
+              <Image src={image} alt={`${firstName} ${lastName} avatar`} fill />
+            </div>
+            <li>
+              <Paragraph>First Name: {firstName}</Paragraph>
+            </li>
+            <li>
+              <Paragraph>Last Name: {lastName}</Paragraph>
+            </li>
+            <li>
+              <Paragraph>
+                Adress: {address.address}, {address.city}
+              </Paragraph>
+            </li>
+          </ul>
+        </div>
       </div>
     </Section>
   );

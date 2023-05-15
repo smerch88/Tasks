@@ -20,7 +20,7 @@ export const getServerSideProps = async (
 ) => {
   try {
     const { query } = context;
-    const page = parseInt(query.page as string, 10);
+    const page = parseInt(query.page as string, 10) || 1;
     const skip = page === 1 ? 0 : (page - 1) * perPage;
     const res = await fetch(
       `https://dummyjson.com/users?limit=${perPage}&skip=${skip}`,

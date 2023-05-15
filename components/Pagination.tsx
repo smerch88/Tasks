@@ -94,7 +94,7 @@ export const Pagination: FC<PaginationProps> = ({
   }, [startPage, endPage, page, handlePageClick]);
 
   return (
-    <div className="container mt-auto">
+    <div className="container mb-10">
       <div className="flex justify-center gap-[4px] md:gap-2">
         <button
           onClick={handleDecreasePage}

@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 export const Header: FC = () => {
   return (
-    <header className="">
+    <header className="shadow-header">
       <div className="p-10">
         <nav>
           <ul className="flex gap-10">

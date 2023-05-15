@@ -43,6 +43,7 @@ module.exports = {
       },
       boxShadow: {
         card: '1px 2px 8px rgba(37, 101, 208, 0.14)',
+        header: '1px 2px 8px rgba(37, 101, 208, 0.14)',
         card_hover: '6px 8px 12px rgba(37, 101, 208, 0.18)',
       },
     },
