@@ -48,9 +48,8 @@ export const SearchWidget: FC = () => {
           type="text"
           value={searchTerm}
           onChange={handleInputChange}
-          className="mb-4"
+          className="mb-4 w-full max-w-[320px] rounded-s"
           placeholder="Name.."
-          className="rpunded-s w-full max-w-[320px]"
         />
         <div className="relative">
           <ul className="absolute left-0 top-0 z-10 max-h-[400px] w-full max-w-[320px] gap-2 overflow-y-scroll rounded-s bg-dark">

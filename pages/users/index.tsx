@@ -53,6 +53,7 @@ const Users: FC<UsersPageProps> = ({ data }) => {
 
   useEffect(() => {
     router.push(`/users?page=${page}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   if (data == undefined) {
