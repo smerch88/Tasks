@@ -1,13 +1,13 @@
-import { withLayout } from '@/page-components/layout/Layout';
-import { AllUsers } from '@/page-components/AllUsers';
-import { Pagination } from '@/page-components/Pagination';
-import SearchWidget from '@/page-components/SearchWidget';
+import { AllUsers } from '@/components/AllUsers';
+import { Pagination } from '@/components/Pagination';
+import { SearchWidget } from '@/components/SearchWidget';
+import { Header } from '@/components/Header';
 import { UserData } from '@/types';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
-import Link from 'next/link';
 
 type UsersPageProps = {
   data: UserData | undefined;
@@ -77,6 +77,7 @@ const Users: FC<UsersPageProps> = ({ data }) => {
         />
         <title>Users List</title>
       </Head>
+      <Header />
       <SearchWidget />
       <AllUsers users={users} />
       <Pagination
@@ -89,4 +90,4 @@ const Users: FC<UsersPageProps> = ({ data }) => {
   );
 };
 
-export default withLayout(Users);
+export default Users;

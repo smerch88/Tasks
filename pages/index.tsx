@@ -1,4 +1,4 @@
-import { withLayout } from '@/page-components/layout/Layout';
+import { Header } from '@/components/Header';
 import { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -12,8 +12,9 @@ const Home: NextPage = () => {
         />
         <title>Arsenii Maksymenko Test Task</title>
       </Head>
+      <Header />
     </>
   );
 };
 
-export default withLayout(Home);
+export default Home;

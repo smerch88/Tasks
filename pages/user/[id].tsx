@@ -1,5 +1,5 @@
-import { withLayout } from '@/page-components/layout/Layout';
-import { UserDetails } from '@/page-components/UserDetails';
+import { Header } from '@/components/Header';
+import { UserDetails } from '@/components/UserDetails';
 import { UserProps } from '@/types';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
@@ -46,9 +46,10 @@ const UserPage: FC<UserProps> = ({ user }) => {
           {lastName}
         </title>
       </Head>
+      <Header />
       <UserDetails user={user} />
     </>
   );
 };
 
-export default withLayout(UserPage);
+export default UserPage;

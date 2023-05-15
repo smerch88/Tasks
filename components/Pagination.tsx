@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useCallback } from 'react';
 
 type PaginationProps = {
   setPage: (page: number) => void;
@@ -24,46 +24,55 @@ export const Pagination: FC<PaginationProps> = ({
     setPage(newPage);
   };
 
-  const handlePageClick = (pageNumber: number) => {
-    const newPage = pageNumber;
-    setPage(newPage);
-  };
+  const handlePageClick = useCallback(
+    (pageNumber: number) => {
+      const newPage = pageNumber;
+      setPage(newPage);
+    },
+    [setPage],
+  );
 
-  const pageButtons = useMemo(() => {
+  const paginationButtons = useMemo(() => {
     const buttons = [];
 
-    let isVisible;
-    let isDots;
+    let isVisible; //определяет кнопки с цифрами, которые видны
+    let isDots; //определяет кнопки с точками
 
-    for (let i = startPage; i <= endPage; ++i) {
-      const isActive = i === page + 1;
-      if (page > 2 && page < endPage - 3) {
+    for (
+      let i = startPage;
+      i <= endPage;
+      i++ // проходим циклом от 1 страницы до последней
+    ) {
+      const realPage = page + 1;
+      const isActive = i === realPage; // кнопка является активной, если номер страницы из пропсов совпадает с её ключём, +1 смещен номер из-за того что в изначальной логике запроса есть умножение на 10 номера страницы, который следовательно не может быть 0
+      if (realPage >= startPage + 4 && realPage <= endPage - 4) {
+        //  случай когда нужно что бы справа и слева одновременно были кнопки с точками
         isVisible =
-          (i <= page + 2 && i >= page) || i === startPage || i === endPage;
-        isDots = i === page + 3 || i === page - 1;
-      } else if (page < endPage - 3) {
-        isVisible = i <= 5 || i === endPage || i === startPage || i <= 5;
-        isDots = i === 6;
-      } else if (page >= endPage - 4) {
+          (i <= realPage + 1 && i >= realPage - 1) ||
+          i === startPage ||
+          i === endPage;
+        isDots = i === realPage + 2 || i === realPage - 2;
+      } else if (realPage <= startPage + 3) {
+        // логика для 4 первых страниц
+        isVisible = i <= startPage + 4 || i === endPage || i === startPage;
+        isDots = i === startPage + 5;
+      } else if (realPage >= endPage - 3) {
+        // логика для 4 последних страниц
         isVisible = i >= endPage - 4 || i === startPage || i === endPage;
         isDots = i === endPage - 5;
-      } else {
-        isVisible = false;
-        isDots = false;
       }
 
       if (isDots) {
         buttons.push(
-          <button
+          <div
             className={clsx(
-              'w-[36px] rounded-sm border-2 border-solid p-2 text-white_light duration-300 hover:border-hover hover:bg-hover md:w-[40px] smOnly:text-xs',
+              'w-[36px] rounded-sm border-2 border-solid p-2 text-center text-white_light duration-300 hover:border-hover hover:bg-hover md:w-[40px] smOnly:text-xs',
               isActive ? 'border-hover bg-hover' : 'border-primary bg-primary',
             )}
             key={i}
-            disabled={isActive}
           >
             ...
-          </button>,
+          </div>,
         );
       }
 
@@ -85,7 +94,7 @@ export const Pagination: FC<PaginationProps> = ({
     }
 
     return buttons;
-  }, [startPage, endPage, page]);
+  }, [startPage, endPage, page, handlePageClick]);
 
   return (
     <div className="container mt-auto">
@@ -103,7 +112,7 @@ export const Pagination: FC<PaginationProps> = ({
           -
         </button>
         <div className="grid grid-cols-7 gap-[4px] md:gap-2 ">
-          {pageButtons}
+          {paginationButtons}
         </div>
         <button
           onClick={handleIncreasePage}

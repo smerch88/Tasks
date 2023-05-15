@@ -1,39 +1,41 @@
 import { Section } from '@/components/Section';
-import { UserCardMini } from '@/components/UserCardMini';
 import { Title } from '@/components/Title';
+import { UserCardMini } from '@/components/UserCardMini';
 import { User } from '@/types';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
-const SearchWidget: FC = () => {
+export const SearchWidget: FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [suggestedUsers, setSuggestedUsers] = useState<User[]>([]);
 
-  const handleInputChange = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const searchTerm = event.target.value;
+  useEffect(() => {
+    const fetchSuggestedUsers = async () => {
+      if (searchTerm) {
+        try {
+          const res = await fetch(
+            `https://dummyjson.com/users/search?q=${searchTerm}`,
+          );
+          const data = await res.json();
 
-    setSearchTerm(searchTerm);
+          if (!res.ok) {
+            throw new Error(data.message);
+          }
 
-    if (searchTerm) {
-      try {
-        const res = await fetch(
-          `https://dummyjson.com/users/search?q=${searchTerm}`,
-        );
-        const data = await res.json();
-
-        if (!res.ok) {
-          throw new Error(data.message);
+          setSuggestedUsers(data.users);
+        } catch (error) {
+          console.error('Error fetching suggested users:', error);
+          setSuggestedUsers([]);
         }
-
-        setSuggestedUsers(data.users);
-      } catch (error) {
-        console.error('Error fetching suggested users:', error);
+      } else {
         setSuggestedUsers([]);
       }
-    } else {
-      setSuggestedUsers([]);
-    }
+    };
+    fetchSuggestedUsers();
+  }, [searchTerm]);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value;
+    setSearchTerm(searchTerm);
   };
 
   return (
@@ -69,5 +71,3 @@ const SearchWidget: FC = () => {
     </Section>
   );
 };
-
-export default SearchWidget;

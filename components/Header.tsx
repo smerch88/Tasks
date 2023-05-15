@@ -5,7 +5,7 @@ import { FC } from 'react';
 export const Header: FC = () => {
   return (
     <header className="">
-      <div className="container py-10">
+      <div className="p-10">
         <nav>
           <ul className="flex gap-10">
             <li>

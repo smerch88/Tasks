@@ -1,4 +1,3 @@
-import { withLayout } from '@/page-components/layout/Layout';
 import { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -20,4 +19,4 @@ const Custom404: NextPage = () => {
   );
 };
 
-export default withLayout(Custom404);
+export default Custom404;
