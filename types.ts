@@ -69,5 +69,5 @@ export type UserData = {
 };
 
 export type UserProps = {
-  user: User;
+  user: User | undefined;
 };

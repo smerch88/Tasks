@@ -22,13 +22,13 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   } catch (error) {
     console.error('Error fetching user data:', error);
     return {
-      props: { user: undefined },
+      props: { user: null },
     };
   }
 };
 
 const UserPage: FC<UserProps> = ({ user }) => {
-  if (!user) {
+  if (user == undefined) {
     return <div>Error loading user data.</div>;
   }
 
@@ -42,7 +42,8 @@ const UserPage: FC<UserProps> = ({ user }) => {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <title>
-          {firstName} {lastName}
+          {firstName ? `${firstName} ` : ''}
+          {lastName}
         </title>
       </Head>
       <UserDetails user={user} />

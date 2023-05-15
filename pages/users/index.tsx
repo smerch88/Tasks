@@ -7,6 +7,7 @@ import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
+import Link from 'next/link';
 
 type UsersPageProps = {
   data: UserData | undefined;
@@ -54,8 +55,17 @@ const Users: FC<UsersPageProps> = ({ data }) => {
     router.push(`/users?page=${page + 1}`);
   }, [page]);
 
-  if (data === null) {
+  if (data == undefined) {
     return <div>Error: Failed to fetch users data</div>;
+  }
+
+  if (data.users.length === 0) {
+    return (
+      <div>
+        <p>Error: No users at this page</p>
+        <Link href={'/users'}>Go to Users Page</Link>
+      </div>
+    );
   }
 
   return (

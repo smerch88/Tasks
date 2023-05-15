@@ -6,6 +6,10 @@ import Image from 'next/image';
 import { FC } from 'react';
 
 export const UserDetails: FC<UserProps> = ({ user }) => {
+  if (!user) {
+    return <div>Error loading user data.</div>;
+  }
+
   const { firstName, lastName, address, image } = user;
 
   return (
