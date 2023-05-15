@@ -43,20 +43,17 @@ export const Pagination: FC<PaginationProps> = ({
       i <= endPage;
       i++ // проходим циклом от 1 страницы до последней
     ) {
-      const realPage = page + 1;
-      const isActive = i === realPage; // кнопка является активной, если номер страницы из пропсов совпадает с её ключём, +1 смещен номер из-за того что в изначальной логике запроса есть умножение на 10 номера страницы, который следовательно не может быть 0
-      if (realPage >= startPage + 4 && realPage <= endPage - 4) {
+      const isActive = i === page; // кнопка является активной, если номер страницы из пропсов совпадает с её ключём
+      if (page >= startPage + 4 && page <= endPage - 4) {
         //  случай когда нужно что бы справа и слева одновременно были кнопки с точками
         isVisible =
-          (i <= realPage + 1 && i >= realPage - 1) ||
-          i === startPage ||
-          i === endPage;
-        isDots = i === realPage + 2 || i === realPage - 2;
-      } else if (realPage <= startPage + 3) {
+          (i <= page + 1 && i >= page - 1) || i === startPage || i === endPage;
+        isDots = i === page + 2 || i === page - 2;
+      } else if (page <= startPage + 3) {
         // логика для 4 первых страниц
         isVisible = i <= startPage + 4 || i === endPage || i === startPage;
         isDots = i === startPage + 5;
-      } else if (realPage >= endPage - 3) {
+      } else if (page >= endPage - 3) {
         // логика для 4 последних страниц
         isVisible = i >= endPage - 4 || i === startPage || i === endPage;
         isDots = i === endPage - 5;
@@ -84,7 +81,7 @@ export const Pagination: FC<PaginationProps> = ({
               isActive ? 'border-hover bg-hover' : 'border-primary bg-primary',
             )}
             key={i}
-            onClick={() => handlePageClick(i - 1)}
+            onClick={() => handlePageClick(i)}
             disabled={isActive}
           >
             {i}
@@ -103,11 +100,11 @@ export const Pagination: FC<PaginationProps> = ({
           onClick={handleDecreasePage}
           className={clsx(
             'hidden w-full max-w-[28px] rounded-sm border-2 border-solid p-2 text-white_light duration-300 md:block md:max-w-[40px] smOnly:text-xs',
-            page === startPage - 1
+            page === startPage
               ? 'border-gray_light bg-gray_light'
               : 'border-primary bg-primary  hover:border-hover hover:bg-hover',
           )}
-          disabled={page === startPage - 1}
+          disabled={page === startPage}
         >
           -
         </button>
@@ -118,11 +115,11 @@ export const Pagination: FC<PaginationProps> = ({
           onClick={handleIncreasePage}
           className={clsx(
             'hidden w-full max-w-[28px] rounded-sm border-2 border-solid p-2 text-white_light duration-300 md:block md:max-w-[40px] smOnly:text-xs',
-            page === endPage - 1
+            page === endPage
               ? 'border-gray_light bg-gray_light'
               : 'border-primary bg-primary  hover:border-hover hover:bg-hover',
           )}
-          disabled={page === endPage - 1}
+          disabled={page === endPage}
         >
           +
         </button>

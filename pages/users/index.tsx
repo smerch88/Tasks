@@ -20,12 +20,12 @@ export const getServerSideProps = async (
 ) => {
   try {
     const { query } = context;
-    const page = parseInt(query.page as string, 10) || 1;
+    const page = parseInt(query.page as string, 10);
+    const skip = page === 1 ? 0 : (page - 1) * perPage;
     const res = await fetch(
-      `https://dummyjson.com/users?limit=${perPage}&skip=${
-        (page - 1) * perPage
-      }`,
+      `https://dummyjson.com/users?limit=${perPage}&skip=${skip}`,
     );
+    console.log(`https://dummyjson.com/users?limit=${perPage}&skip=${skip}`);
     if (!res.ok) {
       throw new Error('Failed to fetch user data');
     }
@@ -47,12 +47,12 @@ const Users: FC<UsersPageProps> = ({ data }) => {
   const total = data?.total;
   const initialPage = data?.skip;
 
-  const [page, setPage] = useState((initialPage ?? 0) / perPage);
-  const [startPage] = useState(1);
+  const [page, setPage] = useState((initialPage ?? 0) / perPage + 1);
   const [endPage] = useState(Math.ceil((total ?? 0) / perPage));
+  const startPage = 1;
 
   useEffect(() => {
-    router.push(`/users?page=${page + 1}`);
+    router.push(`/users?page=${page}`);
   }, [page]);
 
   if (data == undefined) {
