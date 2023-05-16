@@ -33,11 +33,6 @@ export const SearchWidget: FC = () => {
     fetchSuggestedUsers();
   }, [searchTerm]);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = event.target.value;
-    setSearchTerm(searchTerm);
-  };
-
   return (
     <Section className="bg-primary">
       <div className="container">
@@ -47,19 +42,22 @@ export const SearchWidget: FC = () => {
         <input
           type="text"
           value={searchTerm}
-          onChange={handleInputChange}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            const searchTerm = event.target.value;
+            setSearchTerm(searchTerm);
+          }}
           className="mb-4 w-full max-w-[320px] rounded-s"
           placeholder="Name.."
         />
         <div className="relative">
           <ul className="absolute left-0 top-0 z-10 max-h-[400px] w-full max-w-[320px] gap-2 overflow-y-scroll rounded-s bg-dark">
-            {suggestedUsers.map(({ id, firstName, lastName, image }) => (
-              <li key={id}>
+            {suggestedUsers.map((user) => (
+              <li key={user.id}>
                 <UserCardMini
-                  id={id}
-                  firstName={firstName}
-                  lastName={lastName}
-                  image={image}
+                  id={user.id}
+                  firstName={user.firstName}
+                  lastName={user.lastName}
+                  image={user.image}
                   variant="light"
                   direction="horizontal"
                 />

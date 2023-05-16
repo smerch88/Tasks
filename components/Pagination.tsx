@@ -1,5 +1,6 @@
-import clsx from 'clsx';
-import { FC, useMemo, useCallback } from 'react';
+import { FC, useCallback, useMemo } from 'react';
+import { PaginationButton } from './PaginationButton';
+import { PaginationControlButtons } from './PaginationControlButtons';
 
 type PaginationProps = {
   setPage: (page: number) => void;
@@ -60,70 +61,46 @@ export const Pagination: FC<PaginationProps> = ({
       }
 
       if (isDots) {
-        buttons.push(
-          <div
-            className={clsx(
-              'w-[36px] rounded-sm border-2 border-solid p-2 text-center text-white_light duration-300 hover:border-hover hover:bg-hover md:w-[40px] smOnly:text-xs',
-              isActive ? 'border-hover bg-hover' : 'border-primary bg-primary',
-            )}
-            key={i}
-          >
-            ...
-          </div>,
-        );
+        buttons.push({
+          key: i,
+          button: false,
+          isActive: isActive,
+        });
       }
 
       if (isVisible) {
-        buttons.push(
-          <button
-            className={clsx(
-              'w-[36px] rounded-sm border-2 border-solid p-2 text-white_light duration-300 hover:border-hover hover:bg-hover md:w-[40px] smOnly:text-xs',
-              isActive ? 'border-hover bg-hover' : 'border-primary bg-primary',
-            )}
-            key={i}
-            onClick={() => handlePageClick(i)}
-            disabled={isActive}
-          >
-            {i}
-          </button>,
-        );
+        buttons.push({
+          key: i,
+          button: true,
+          isActive: isActive,
+        });
       }
     }
 
     return buttons;
-  }, [startPage, endPage, page, handlePageClick]);
+  }, [startPage, endPage, page]);
 
   return (
     <div className="container mb-10">
-      <div className="flex justify-center gap-[4px] md:gap-2">
-        <button
-          onClick={handleDecreasePage}
-          className={clsx(
-            'hidden w-full max-w-[28px] rounded-sm border-2 border-solid p-2 text-white_light duration-300 md:block md:max-w-[40px] smOnly:text-xs',
-            page === startPage
-              ? 'border-gray_light bg-gray_light'
-              : 'border-primary bg-primary  hover:border-hover hover:bg-hover',
-          )}
-          disabled={page === startPage}
-        >
-          -
-        </button>
+      <PaginationControlButtons
+        handleDecreasePage={handleDecreasePage}
+        handleIncreasePage={handleIncreasePage}
+        page={page}
+        startPage={startPage}
+        endPage={endPage}
+      >
         <div className="grid grid-cols-7 gap-[4px] md:gap-2 ">
-          {paginationButtons}
+          {paginationButtons.map((button) => (
+            <PaginationButton
+              key={button.key}
+              button={button.button}
+              isActive={button.isActive}
+              pageNumber={button.key}
+              onClick={() => handlePageClick(button.key)}
+            />
+          ))}
         </div>
-        <button
-          onClick={handleIncreasePage}
-          className={clsx(
-            'hidden w-full max-w-[28px] rounded-sm border-2 border-solid p-2 text-white_light duration-300 md:block md:max-w-[40px] smOnly:text-xs',
-            page === endPage
-              ? 'border-gray_light bg-gray_light'
-              : 'border-primary bg-primary  hover:border-hover hover:bg-hover',
-          )}
-          disabled={page === endPage}
-        >
-          +
-        </button>
-      </div>
+      </PaginationControlButtons>
     </div>
   );
 };

@@ -13,16 +13,16 @@ export const AllUsers: FC<AllUsersProps> = ({ users }) => {
     <Section className="">
       <div className="container">
         <Title variant="dark" tag="h2" className="mb-4">
-          Lis of all users
+          List of all users
         </Title>
         <ul className="grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-2 xl:grid-cols-5">
-          {users.map(({ firstName, lastName, image, id }) => (
-            <li key={id}>
+          {users.map((user) => (
+            <li key={user.id}>
               <UserCardMini
-                id={id}
-                firstName={firstName}
-                lastName={lastName}
-                image={image}
+                id={user.id}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                image={user.image}
                 direction="vertical"
               />
             </li>

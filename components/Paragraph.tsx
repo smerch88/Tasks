@@ -13,22 +13,18 @@ export const Paragraph: FC<ParagraphProps> = ({
   size = 'big',
   children,
   className,
-  ...props
 }) => {
   return (
     <p
       className={clsx(
         'font-light',
-        {
-          'text-dark': variant === 'dark',
-          'text-white_light': variant === 'light',
-          'text-base md:text-xl': size === 'big',
-          'text-sm md:text-base': size === 'small',
-          'text-xs': size === 'extrasmall',
-        },
+        variant === 'dark' ? 'ext-dark' : '',
+        variant === 'light' ? 'text-white_light' : '',
+        size === 'big' ? 'text-base md:text-xl' : '',
+        size === 'small' ? 'text-sm md:text-base' : '',
+        size === 'extrasmall' ? 'text-xs' : '',
         className,
       )}
-      {...props}
     >
       {children}
     </p>
