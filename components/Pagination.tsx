@@ -1,5 +1,6 @@
 import { FC, useCallback, useMemo } from 'react';
 import { PaginationButton } from './PaginationButton';
+import { PaginationButtonsArray } from './PaginationButtonsArray';
 import { PaginationControlButtons } from './PaginationControlButtons';
 
 type PaginationProps = {
@@ -34,50 +35,7 @@ export const Pagination: FC<PaginationProps> = ({
   );
 
   const paginationButtons = useMemo(() => {
-    const buttons = [];
-
-    let isVisible; //определяет кнопки с цифрами, которые видны
-    let isDots; //определяет кнопки с точками
-
-    for (
-      let i = startPage;
-      i <= endPage;
-      i++ // проходим циклом от 1 страницы до последней
-    ) {
-      const isActive = i === page; // кнопка является активной, если номер страницы из пропсов совпадает с её ключём
-      if (page >= startPage + 4 && page <= endPage - 4) {
-        //  случай когда нужно что бы справа и слева одновременно были кнопки с точками
-        isVisible =
-          (i <= page + 1 && i >= page - 1) || i === startPage || i === endPage;
-        isDots = i === page + 2 || i === page - 2;
-      } else if (page <= startPage + 3) {
-        // логика для 4 первых страниц
-        isVisible = i <= startPage + 4 || i === endPage || i === startPage;
-        isDots = i === startPage + 5;
-      } else if (page >= endPage - 3) {
-        // логика для 4 последних страниц
-        isVisible = i >= endPage - 4 || i === startPage || i === endPage;
-        isDots = i === endPage - 5;
-      }
-
-      if (isDots) {
-        buttons.push({
-          key: i,
-          button: false,
-          isActive: isActive,
-        });
-      }
-
-      if (isVisible) {
-        buttons.push({
-          key: i,
-          button: true,
-          isActive: isActive,
-        });
-      }
-    }
-
-    return buttons;
+    return PaginationButtonsArray(startPage, endPage, page);
   }, [startPage, endPage, page]);
 
   return (
