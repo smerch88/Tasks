@@ -1,6 +1,6 @@
 import { FC, useCallback, useMemo } from 'react';
 import { PaginationButton } from './PaginationButton';
-import { PaginationButtonsArray } from './PaginationButtonsArray';
+import { getPaginationButtons } from '../utils/getPaginationButtons';
 import { PaginationControlButtons } from './PaginationControlButtons';
 
 type PaginationProps = {
@@ -35,7 +35,7 @@ export const Pagination: FC<PaginationProps> = ({
   );
 
   const paginationButtons = useMemo(() => {
-    return PaginationButtonsArray(startPage, endPage, page);
+    return getPaginationButtons(startPage, endPage, page);
   }, [startPage, endPage, page]);
 
   return (

@@ -1,4 +1,4 @@
-export const PaginationButtonsArray = (
+export const getPaginationButtons = (
   startPage: number,
   endPage: number,
   page: number,
