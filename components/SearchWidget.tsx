@@ -23,7 +23,6 @@ export const SearchWidget: FC = () => {
 
           setSuggestedUsers(data.users);
         } catch (error) {
-          console.error('Error fetching suggested users:', error);
           setSuggestedUsers([]);
         }
       } else {

@@ -20,7 +20,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       props: { user: user },
     };
   } catch (error) {
-    console.error('Error fetching user data:', error);
     return {
       props: { user: null },
     };

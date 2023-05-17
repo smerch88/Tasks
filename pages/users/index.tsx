@@ -25,7 +25,6 @@ export const getServerSideProps = async (
     const res = await fetch(
       `https://dummyjson.com/users?limit=${perPage}&skip=${skip}`,
     );
-    console.log(`https://dummyjson.com/users?limit=${perPage}&skip=${skip}`);
     if (!res.ok) {
       throw new Error('Failed to fetch user data');
     }
@@ -34,7 +33,6 @@ export const getServerSideProps = async (
       props: { data },
     };
   } catch (error) {
-    console.error('Error fetching user data:', error);
     return {
       props: { data: undefined },
     };
