@@ -5,10 +5,11 @@ import { useDebounceValue } from '@/hooks/useDebounceValue';
 import { User } from '@/types';
 import { FC, useEffect, useState } from 'react';
 
+const cache: Record<string, User[]> = {};
+
 export const SearchWidget: FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [suggestedUsers, setSuggestedUsers] = useState<User[]>([]);
-  const [cache, setCache] = useState<Record<string, User[]>>({});
   const [fetchController, setFetchController] =
     useState<AbortController | null>(null);
 
@@ -35,10 +36,8 @@ export const SearchWidget: FC = () => {
             }
 
             const users = data.users || [];
-            setCache((prevCache) => ({
-              ...prevCache,
-              [debouncedSearchTerm]: users,
-            }));
+            cache[debouncedSearchTerm] = users;
+            console.log(cache);
             setSuggestedUsers(users);
           } catch (error) {
             setSuggestedUsers([]);
@@ -55,7 +54,7 @@ export const SearchWidget: FC = () => {
 
     fetchSuggestedUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearchTerm, cache]);
+  }, [debouncedSearchTerm]);
 
   return (
     <Section className="bg-primary">
