@@ -34,7 +34,7 @@ export const getServerSideProps = async (
     };
   } catch (error) {
     return {
-      props: { data: undefined },
+      props: { data: null },
     };
   }
 };
