@@ -37,7 +37,6 @@ export const SearchWidget: FC = () => {
 
             const users = data.users || [];
             cache[debouncedSearchTerm] = users;
-            console.log(cache);
             setSuggestedUsers(users);
           } catch (error) {
             setSuggestedUsers([]);

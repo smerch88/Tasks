@@ -18,6 +18,11 @@ export const Header: FC = () => {
                 <Paragraph>Users</Paragraph>
               </Link>
             </li>
+            <li>
+              <Link href="/table">
+                <Paragraph>Table</Paragraph>
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
