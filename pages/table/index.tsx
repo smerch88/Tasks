@@ -14,7 +14,7 @@ type TableProps = {
 };
 
 export const getStaticProps: GetStaticProps<{
-  data: TableProps | null;
+  data: TableProps;
 }> = async () => {
   try {
     const res = await fetch(`https://dummyjson.com/users?limit=100`);
