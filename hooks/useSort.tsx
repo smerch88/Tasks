@@ -4,13 +4,21 @@ import { useState, useEffect } from 'react';
 type useSortProps = {
   users: User[];
   order: 'asc' | 'desc';
-  column: 'age' | 'weight' | 'height' | false;
+  column: 'name' | 'age' | 'weight' | 'height' | 'id' | false;
 };
 
 const sortFunctions = {
+  name: (a: User, b: User) => {
+    const nameComparison = a.firstName.localeCompare(b.firstName);
+    if (nameComparison === 0) {
+      return a.lastName.localeCompare(b.lastName);
+    }
+    return nameComparison;
+  },
   age: (a: User, b: User) => a.age - b.age,
   weight: (a: User, b: User) => a.weight - b.weight,
   height: (a: User, b: User) => a.height - b.height,
+  id: (a: User, b: User) => a.id - b.id,
 };
 
 export const useSort = ({ users, order, column }: useSortProps): User[] => {
