@@ -8,7 +8,7 @@ type UserCardMiniProps = {
   className?: string;
   firstName: string;
   lastName: string;
-  id: string;
+  id: number;
   image: string;
   variant?: 'dark' | 'light';
   direction?: 'horizontal' | 'vertical';
