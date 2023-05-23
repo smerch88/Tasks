@@ -71,3 +71,11 @@ export type UserData = {
 export type UserProps = {
   user: User | undefined;
 };
+
+export type Product = {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  quantity: number;
+};

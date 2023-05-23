@@ -23,6 +23,11 @@ export const Header: FC = () => {
                 <Paragraph>Table</Paragraph>
               </Link>
             </li>
+            <li>
+              <Link href="/webshop">
+                <Paragraph>WebShop</Paragraph>
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
