@@ -1,5 +1,4 @@
 import { AllProducts } from '@/components/AllProducts';
-import { Cart } from '@/components/Cart';
 import { Header } from '@/components/Header';
 import { ShopItem } from '@/types';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
@@ -35,7 +34,6 @@ const WebShop = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
         <title>WebShop</title>
       </Head>
       <Header />
-      <Cart />
       <AllProducts data={data} />
     </>
   );

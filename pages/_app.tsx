@@ -1,7 +1,6 @@
 import { CartProvider } from '@/components/CartProvider';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import 'swiper/css';
 
 const App = ({ Component, pageProps = {} }: AppProps) => {
   return (
