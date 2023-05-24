@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useState } from 'react';
+import { createContext, PropsWithChildren, useState, useEffect } from 'react';
 import { ShopItem } from '@/types';
 
 export type CartContextType = {
@@ -11,6 +11,19 @@ const CartContext = createContext<CartContextType | null>(null);
 
 const CartProvider = ({ children }: PropsWithChildren) => {
   const [items, setItems] = useState<ShopItem[]>([]);
+
+  useEffect(() => {
+    const storedItems = localStorage.getItem('cartItems');
+    if (storedItems) {
+      setItems(JSON.parse(storedItems));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (items.length > 0) {
+      localStorage.setItem('cartItems', JSON.stringify(items));
+    }
+  }, [items]);
 
   const addItem = (product: ShopItem) => {
     const itemExists = items.some((item) => item.id === product.id);

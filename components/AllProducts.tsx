@@ -25,7 +25,7 @@ export const AllProducts: FC<AllProductsProps> = ({ data }) => {
   return (
     <Section>
       <div className="container">
-        <ul className="relative grid grid-cols-1 gap-4 md:grid-cols-2">
+        <ul className="relative grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {data &&
             data.map((item) => (
               <li key={item.id}>

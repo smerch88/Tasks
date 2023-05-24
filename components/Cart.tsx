@@ -2,6 +2,7 @@ import { FC, useContext, useState } from 'react';
 import { CartContext, CartContextType } from './CartProvider';
 import { Title } from './Title';
 import { Paragraph } from './Paragraph';
+import Cross from '@/public/images/cross.svg';
 
 export const Cart: FC = () => {
   const cartContext = useContext<CartContextType | null>(CartContext);
@@ -30,21 +31,24 @@ export const Cart: FC = () => {
         {itemCount}
       </div>
       {isCartVisible && itemCount > 0 && (
-        <ul className="absolute right-10 top-14 z-10 grid w-40 gap-4 rounded-md bg-white p-4 shadow-card md:top-28">
+        <ul className="absolute right-10 top-14 z-10 grid w-60 gap-4 rounded-md bg-white p-4 shadow-card md:top-28">
           {cartItems.map((item) => (
             <li key={item.id} className="grid gap-2">
-              <div>
-                <Title tag="h3">{item.title}</Title>
+              <Title tag="h3">{item.title}</Title>
+              <div className="flex justify-between gap-4">
                 <Paragraph>Price: ${item.price}</Paragraph>
+                <button
+                  className="rounded-xl p-1 text-white_light duration-300 hover:animate-pulse hover:fill-red"
+                  onClick={() => handleRemoveItem(item.id)}
+                >
+                  <Cross className="h-4 w-4" />
+                </button>
               </div>
-              <button
-                className="w-full max-w-[120px] rounded-xl bg-red text-white_light duration-300 hover:bg-secondary"
-                onClick={() => handleRemoveItem(item.id)}
-              >
-                Remove
-              </button>
             </li>
           ))}
+          <button className="mx-auto w-full max-w-[120px] rounded-xl bg-primary p-4 text-xl text-white_light duration-300 hover:bg-hover">
+            Order
+          </button>
         </ul>
       )}
     </div>
