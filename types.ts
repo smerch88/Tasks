@@ -72,10 +72,19 @@ export type UserProps = {
   user: User | undefined;
 };
 
-export type Product = {
+//shop data
+
+export type ShopItem = {
   id: number;
-  name: string;
+  title: string;
   price: number;
   description: string;
-  quantity: number;
+  category: string;
+  image: string;
+  rating: Rating;
+};
+
+export type Rating = {
+  rate: number;
+  count: number;
 };

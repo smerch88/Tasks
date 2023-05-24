@@ -1,48 +1,30 @@
 import { AllProducts } from '@/components/AllProducts';
 import { Cart } from '@/components/Cart';
 import { Header } from '@/components/Header';
-import { Product } from '@/types';
+import { ShopItem } from '@/types';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
-import { FC, useEffect, useState } from 'react';
 
-const WebShop: FC = () => {
-  const [cart, setCart] = useState<Product[]>([]);
-
-  useEffect(() => {
-    const storedCart = localStorage.getItem('cart');
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
+export const getStaticProps: GetStaticProps<{
+  data: ShopItem[];
+}> = async () => {
+  try {
+    const res = await fetch(`https://fakestoreapi.com/products`);
+    if (!res.ok) {
+      throw new Error('Failed to fetch shop data');
     }
-  }, []);
+    const data = await res.json();
+    return {
+      props: { data },
+    };
+  } catch (err) {
+    return {
+      props: { data: null },
+    };
+  }
+};
 
-  useEffect(() => {
-    if (cart.length !== 0) {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
-  }, [cart]);
-
-  const addToCart = (item: Product) => {
-    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
-    if (existingItem) {
-      const updatedCart = cart.map((cartItem) =>
-        cartItem.id === item.id
-          ? { ...cartItem, quantity: cartItem.quantity + 1 }
-          : cartItem,
-      );
-      setCart(updatedCart);
-    } else {
-      const updatedItem = { ...item, quantity: 1 };
-      setCart([...cart, updatedItem]);
-    }
-  };
-
-  const removeFromCart = (item: Product) => {
-    const updatedCart = cart.filter((cartItem) => cartItem.id !== item.id);
-    setCart(updatedCart);
-  };
-
-  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-
+const WebShop = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
@@ -53,12 +35,8 @@ const WebShop: FC = () => {
         <title>WebShop</title>
       </Head>
       <Header />
-      <AllProducts addToCart={addToCart} />
-      <Cart
-        cart={cart}
-        totalQuantity={totalQuantity}
-        removeFromCart={removeFromCart}
-      />
+      <Cart />
+      <AllProducts data={data} />
     </>
   );
 };

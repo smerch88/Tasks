@@ -25,7 +25,8 @@
     "**/*.tsx",
     "pages/api/sendMail.js",
     "components/Form/index.js",
-    "utils/schema.js"
+    "utils/schema.js",
+    "components/CartProvider.tsx"
   ],
   "exclude": ["node_modules"]
 }

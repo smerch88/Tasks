@@ -1,32 +1,56 @@
-import data from '@/data/goods.json';
-import { Product } from '@/types';
-import { FC } from 'react';
+import { ShopItem } from '@/types';
+import { FC, useContext } from 'react';
 import { Section } from './Section';
+import { CartContext } from './CartProvider';
+import Image from 'next/image';
 
 type AllProductsProps = {
-  addToCart: (item: Product) => void;
+  data: ShopItem[];
 };
 
-export const AllProducts: FC<AllProductsProps> = ({ addToCart }) => {
+export const AllProducts: FC<AllProductsProps> = ({ data }) => {
+  const context = useContext(CartContext);
+
+  const handleCartButtonClick = (item: ShopItem) => {
+    const itemInCart = context?.items.find(
+      (cartItem) => cartItem.id === item.id,
+    );
+    if (itemInCart) {
+      context?.deleteItem(item.id);
+    } else {
+      context?.addItem(item);
+    }
+  };
+
   return (
     <Section>
       <div className="container">
-        <ul className="relative grid grid-cols-1 gap-4 md:grid-cols-3">
-          {data.goods.map((item) => (
+        <ul className="relative grid grid-cols-1 gap-4 md:grid-cols-4">
+          {data.map((item) => (
             <li
               key={item.id}
-              className="flex flex-col justify-between rounded-xl border-2 border-solid p-4 shadow-card duration-300 hover:shadow-card_hover"
+              className="flex flex-col justify-between rounded-xl border-2 border-solid bg-white p-4 shadow-card duration-300 hover:shadow-card_hover"
             >
+              <div className="relative mx-auto">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={300}
+                  height={200}
+                />
+              </div>
               <div className="">
-                <h3>{item.name}</h3>
+                <h3>{item.title}</h3>
                 <p>Price: ${item.price}</p>
                 <p>{item.description}</p>
               </div>
               <button
-                onClick={() => addToCart(item as Product)}
+                onClick={() => handleCartButtonClick(item)}
                 className="w-full max-w-[120px] rounded-xl bg-dark text-white_light duration-300 hover:bg-primary"
               >
-                Add to Cart
+                {context?.items.find((cartItem) => cartItem.id === item.id)
+                  ? 'Remove'
+                  : 'Add to Cart'}
               </button>
             </li>
           ))}

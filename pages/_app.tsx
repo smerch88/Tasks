@@ -1,10 +1,14 @@
-import type { AppProps } from 'next/app';
-
+import { CartProvider } from '@/components/CartProvider';
 import '@/styles/globals.css';
+import type { AppProps } from 'next/app';
 import 'swiper/css';
 
 const App = ({ Component, pageProps = {} }: AppProps) => {
-  return <Component {...pageProps} />;
+  return (
+    <CartProvider>
+      <Component {...pageProps} />
+    </CartProvider>
+  );
 };
 
 export default App;
