@@ -29,7 +29,7 @@ export const Title: FC<TitleProps> = ({
         tag == 'h2'
           ? 'text-2xl font-semibold	md:text-[32px] md:leading-[1.25] xl:text-4xl'
           : '',
-        tag == 'h3' ? 'text-xl font-semibold md:text-2xl xl:text-2xl' : '',
+        tag == 'h3' ? 'text-sm font-semibold md:text-sm xl:text-sm' : '',
       )}
     >
       {children}

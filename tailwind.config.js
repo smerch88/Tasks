@@ -28,7 +28,9 @@ module.exports = {
           xl: '2rem',
         },
       },
-      backgroundImage: {},
+      backgroundImage: {
+        cart_button: "url('/images/cart.png')",
+      },
       colors: {
         dark: '#0F1C26',
         primary: '#094079',

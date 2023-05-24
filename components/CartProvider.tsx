@@ -23,8 +23,6 @@ const CartProvider = ({ children }: PropsWithChildren) => {
     setItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  console.log(items);
-
   return (
     <CartContext.Provider value={{ items, addItem, deleteItem }}>
       {children}

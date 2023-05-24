@@ -5,9 +5,9 @@ import { FC } from 'react';
 export const Header: FC = () => {
   return (
     <header className="shadow-header">
-      <div className="p-10">
+      <div className="p-2 md:p-10">
         <nav>
-          <ul className="flex gap-10">
+          <ul className="flex flex-col md:flex-row md:gap-10 ">
             <li>
               <Link href="/">
                 <Paragraph>Home</Paragraph>
