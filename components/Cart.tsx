@@ -1,9 +1,8 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext, useMemo, useState } from 'react';
 import { CartContext, CartContextType } from './CartProvider';
 import { Title } from './Title';
 import { Paragraph } from './Paragraph';
 import Cross from '@/public/images/cross.svg';
-import { Button } from './Button';
 
 export const Cart: FC = () => {
   const cartContext = useContext<CartContextType | null>(CartContext);
@@ -14,7 +13,7 @@ export const Cart: FC = () => {
   };
 
   const itemCount = cartContext?.items.length || 0;
-  const cartItems = cartContext?.items || [];
+  const cartItems = useMemo(() => cartContext?.items || [], [cartContext]);
 
   const toggleCartVisibility = () => {
     setIsCartVisible(!isCartVisible);
