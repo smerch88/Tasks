@@ -3,6 +3,7 @@ import { CartContext, CartContextType } from './CartProvider';
 import { Title } from './Title';
 import { Paragraph } from './Paragraph';
 import Cross from '@/public/images/cross.svg';
+import { Button } from './Button';
 
 export const Cart: FC = () => {
   const cartContext = useContext<CartContextType | null>(CartContext);

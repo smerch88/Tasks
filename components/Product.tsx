@@ -5,7 +5,7 @@ import { ShopItem } from '@/types';
 import { Title } from './Title';
 import { CartContext } from './CartProvider';
 import { useDebounceValue } from '@/hooks/useDebounceValue';
-import clsx from 'clsx';
+import { Button } from '@/components/Button';
 
 type ProductProps = {
   item: ShopItem;
@@ -91,19 +91,18 @@ export const Product: FC<ProductProps> = ({ item, handleCartButtonClick }) => {
       </div>
       <div>
         <Paragraph>Price: ${item.price}</Paragraph>
-        <button
+        <Button
           onClick={() => handleCartButtonClick(item)}
-          className={clsx(
-            'w-full max-w-[120px] rounded-xl  text-white_light duration-300 ',
+          variant={
             context?.items.find((cartItem) => cartItem.id === item.id)
-              ? 'bg-red hover:bg-secondary'
-              : 'bg-dark hover:bg-primary',
-          )}
+              ? 'remove'
+              : 'add'
+          }
         >
           {context?.items.find((cartItem) => cartItem.id === item.id)
             ? 'Remove'
             : 'Add to Cart'}
-        </button>
+        </Button>
       </div>
     </div>
   );
