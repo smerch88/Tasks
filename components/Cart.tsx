@@ -1,19 +1,18 @@
-import { FC, useContext, useMemo, useState } from 'react';
-import { CartContext, CartContextType } from './CartProvider';
+import { FC, useState } from 'react';
+import { useCreateCart } from './CartProvider';
 import { Title } from './Title';
 import { Paragraph } from './Paragraph';
 import Cross from '@/public/images/cross.svg';
 
 export const Cart: FC = () => {
-  const cartContext = useContext<CartContextType | null>(CartContext);
   const [isCartVisible, setIsCartVisible] = useState(false);
+  const context = useCreateCart();
 
   const handleRemoveItem = (itemId: number) => {
-    cartContext?.deleteItem(itemId);
+    context.deleteItem(itemId);
   };
-
-  const itemCount = cartContext?.items.length || 0;
-  const cartItems = useMemo(() => cartContext?.items || [], [cartContext]);
+  const itemCount = context.items.length || 0;
+  const cartItems = context.items || [];
 
   const toggleCartVisibility = () => {
     setIsCartVisible(!isCartVisible);

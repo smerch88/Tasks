@@ -1,5 +1,12 @@
-import { createContext, PropsWithChildren, useState, useEffect } from 'react';
 import { ShopItem } from '@/types';
+import {
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 export type CartContextType = {
   items: ShopItem[];
@@ -7,9 +14,14 @@ export type CartContextType = {
   deleteItem: (id: number) => void;
 };
 
-const CartContext = createContext<CartContextType | null>(null);
+type Methods = {
+  addItem: (product: ShopItem) => void;
+  deleteItem: (id: number) => void;
+};
 
-const CartProvider = ({ children }: PropsWithChildren) => {
+export const CartContext = createContext<CartContextType | null>(null);
+
+export const CartProvider = ({ children }: PropsWithChildren) => {
   const [items, setItems] = useState<ShopItem[]>([]);
 
   useEffect(() => {
@@ -25,22 +37,42 @@ const CartProvider = ({ children }: PropsWithChildren) => {
     }
   }, [items]);
 
-  const addItem = (product: ShopItem) => {
-    const itemExists = items.some((item) => item.id === product.id);
-    if (!itemExists) {
-      setItems((prev) => [...prev, product]);
-    }
-  };
+  const methods: Methods = useMemo(() => {
+    return {
+      addItem: (product: ShopItem) => {
+        const itemExists = items.some((item) => item.id === product.id);
+        if (!itemExists) {
+          setItems((prev) => [...prev, product]);
+        }
+      },
+      deleteItem: (id: number) => {
+        setItems((prev) => prev.filter((item) => item.id !== id));
+      },
+    };
+  }, [items]);
 
-  const deleteItem = (id: number) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
-  };
+  const memoizedContext = useMemo<CartContextType>(() => {
+    return {
+      items,
+      ...methods,
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items]);
 
   return (
-    <CartContext.Provider value={{ items, addItem, deleteItem }}>
+    <CartContext.Provider value={memoizedContext}>
       {children}
     </CartContext.Provider>
   );
 };
 
-export { CartProvider, CartContext };
+export function useCreateCart() {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error(
+      'useCreateLesson must be used within a CreateLessonProvider',
+    );
+  }
+
+  return context;
+}
