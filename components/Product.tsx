@@ -40,14 +40,14 @@ export const Product: FC<ProductProps> = ({ item, handleCartButtonClick }) => {
   };
 
   return (
-    <div className="flex flex-col justify-between rounded-xl border-2 border-solid bg-white p-4 shadow-card duration-300 hover:shadow-card_hover">
+    <div className="flex flex-col justify-between rounded-xl border-2 border-solid border-white bg-white p-4 shadow-card duration-300 hover:shadow-card_hover">
       <div className="mb-4 grid gap-4">
-        <div className="relative mx-auto h-40 w-full">
+        <div className="relative mx-auto h-40 w-full overflow-hidden">
           <Image
             src={item.image}
             alt={item.title}
             fill
-            className="object-contain"
+            className="object-contain transition-all duration-500 hover:scale-105"
           />
         </div>
         <div

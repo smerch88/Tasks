@@ -1,8 +1,7 @@
 import { FC, useState } from 'react';
+import { CartItem } from './CartItem';
 import { useCreateCart } from './CartProvider';
-import { Title } from './Title';
-import { Paragraph } from './Paragraph';
-import Cross from '@/public/images/cross.svg';
+import { Transition } from '@headlessui/react';
 
 export const Cart: FC = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
@@ -11,8 +10,9 @@ export const Cart: FC = () => {
   const handleRemoveItem = (itemId: number) => {
     context.deleteItem(itemId);
   };
-  const itemCount = context.items.length || 0;
-  const cartItems = context.items || [];
+
+  const itemCount = context.items.length;
+  const cartItems = context.items;
 
   const toggleCartVisibility = () => {
     setIsCartVisible(!isCartVisible);
@@ -22,7 +22,7 @@ export const Cart: FC = () => {
     <div className="ml-4 md:top-20 md:ml-20">
       <button
         onClick={toggleCartVisibility}
-        className="rounded-xl text-white_light duration-300 hover:animate-bounce"
+        className="rounded-xl text-white_light duration-300 hover:animate-spin"
       >
         <img src="/images/cart.png" alt="cart" className="h-10 w-10" />
       </button>
@@ -30,20 +30,13 @@ export const Cart: FC = () => {
         {itemCount}
       </div>
       {isCartVisible && itemCount > 0 && (
-        <ul className="absolute right-10 top-14 z-10 grid w-60 gap-4 rounded-md bg-white p-4 shadow-card md:top-28">
+        <ul className="absolute right-10 top-14 z-20 grid w-60 gap-4 rounded-md bg-white p-4 shadow-card md:top-28">
           {cartItems.map((item) => (
-            <li key={item.id} className="grid gap-2">
-              <Title tag="h3">{item.title}</Title>
-              <div className="flex justify-between gap-4">
-                <Paragraph>Price: ${item.price}</Paragraph>
-                <button
-                  className="rounded-xl p-1 text-white_light duration-300 hover:animate-pulse hover:fill-red"
-                  onClick={() => handleRemoveItem(item.id)}
-                >
-                  <Cross className="h-4 w-4" />
-                </button>
-              </div>
-            </li>
+            <CartItem
+              item={item}
+              handleRemoveItem={handleRemoveItem}
+              key={item.id}
+            />
           ))}
           <button className="mx-auto w-full max-w-[120px] rounded-xl bg-primary p-4 text-xl text-white_light duration-300 hover:bg-hover">
             Order

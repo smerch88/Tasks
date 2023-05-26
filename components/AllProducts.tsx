@@ -3,6 +3,8 @@ import { FC, useContext } from 'react';
 import { CartContext } from './CartProvider';
 import { Product } from './Product';
 import { Section } from './Section';
+import { BackgroundEffect } from './BackgroundEffect';
+import { Title } from './Title';
 
 type AllProductsProps = {
   data: ShopItem[];
@@ -23,9 +25,15 @@ export const AllProducts: FC<AllProductsProps> = ({ data }) => {
   };
 
   return (
-    <Section>
+    <Section className="relative overflow-hidden">
       <div className="container">
-        <ul className="relative grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <Title
+          tag="h1"
+          className="mb-8 animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-center text-5xl font-black text-transparent"
+        >
+          Wellcome to Rainbow Shop
+        </Title>
+        <ul className="relative z-10 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {data &&
             data.map((item) => (
               <li key={item.id}>
@@ -37,6 +45,7 @@ export const AllProducts: FC<AllProductsProps> = ({ data }) => {
             ))}
         </ul>
       </div>
+      <BackgroundEffect />
     </Section>
   );
 };
