@@ -1,0 +1,77 @@
+{
+  "goods": [
+    {
+      "id": 1,
+      "name": "Product A",
+      "price": 9.99,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "id": 2,
+      "name": "Product B",
+      "price": 14.99,
+      "description": "Nulla facilisi. Aenean vitae condimentum quam."
+    },
+    {
+      "id": 3,
+      "name": "Product C",
+      "price": 19.99,
+      "description": "Duis vel tortor vitae ante eleifend eleifend."
+    },
+    {
+      "id": 4,
+      "name": "Product D",
+      "price": 7.99,
+      "description": "Pellentesque ac tincidunt velit. Ut tincidunt mi vel enim."
+    },
+    {
+      "id": 5,
+      "name": "Product E",
+      "price": 24.99,
+      "description": "Fusce tempor nulla ac risus pharetra, et consequat magna fringilla."
+    },
+    {
+      "id": 6,
+      "name": "Product F",
+      "price": 11.99,
+      "description": "Curabitur semper velit in justo semper, sit amet egestas est ultrices.",
+      "quantity": 12
+    },
+    {
+      "id": 7,
+      "name": "Product G",
+      "price": 16.99,
+      "description": "Vestibulum ac dui eu erat efficitur consequat."
+    },
+    {
+      "id": 8,
+      "name": "Product H",
+      "price": 29.99,
+      "description": "Suspendisse volutpat justo nec dolor malesuada, eu posuere metus scelerisque."
+    },
+    {
+      "id": 9,
+      "name": "Product I",
+      "price": 5.99,
+      "description": "Maecenas malesuada elit id metus tincidunt, eu eleifend sem convallis."
+    },
+    {
+      "id": 10,
+      "name": "Product J",
+      "price": 8.99,
+      "description": "Praesent tristique justo id semper egestas."
+    },
+    {
+      "id": 11,
+      "name": "Product K",
+      "price": 17.99,
+      "description": "Nunc mattis diam in nunc dapibus tincidunt."
+    },
+    {
+      "id": 12,
+      "name": "Product L",
+      "price": 13.99,
+      "description": "Phasellus pretium est vel dui ullamcorper, ac pellentesque nisi consectetur."
+    }
+  ]
+}

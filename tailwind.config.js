@@ -28,7 +28,9 @@ module.exports = {
           xl: '2rem',
         },
       },
-      backgroundImage: {},
+      backgroundImage: {
+        cart_button: "url('/images/cart.png')",
+      },
       colors: {
         dark: '#0F1C26',
         primary: '#094079',
@@ -46,8 +48,33 @@ module.exports = {
         header: '1px 2px 8px rgba(37, 101, 208, 0.14)',
         card_hover: '6px 8px 12px rgba(37, 101, 208, 0.18)',
       },
+      animation: {
+        blob: 'blob 7s infinite',
+        text: 'text 5s ease infinite',
+      },
+      keyframes: {
+        blob: {
+          '0%': { transform: 'translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+          '100%': { transform: 'tranlate(0px, 0px) scale(1)' },
+        },
+        text: {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center',
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center',
+          },
+        },
+      },
     },
   },
+
+  variants: { extend: {} },
+
   plugins: [
     require('@tailwindcss/forms'),
     require('@headlessui/tailwindcss'),
